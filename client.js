@@ -6,6 +6,14 @@
  * 3. After the loop, log out the total number of
  *    hobbies
  */
+let hobbies = ['fishing', 'hiking', 'skating', 'grilling'];
+const list = document.getElementById("hobby-list");
+
+for (hobby of hobbies) {
+    list.innerHTML += `<li>${hobby}</li>`;
+    console.log(hobby);
+}
+
 
 
 // Example output
@@ -30,6 +38,16 @@
 // green, red, teal, orange, teal
 // Teal was found 2 times
 
+let colorArray = ['green', 'red', 'teal', 'orange', 'teal'];
+let tealCount = 0;
+for (color of colorArray) {
+    if (color === 'teal') {
+        tealCount += 1;
+    }
+}
+console.log(colorArray);
+console.log(`Teal was found ${tealCount} times`)
+
 
 /**
  * #3 Even & Odd
@@ -47,6 +65,21 @@
 // Odd 3, 7, 11
 // Even 2, 8, 4, 2
 
+let numArray = ['1', '7', '4', '3', '10'];
+let evenNumbers  =[];
+let oddNumbers = [];
+
+for (num of numArray) {
+    if (num % 2 === 0) {
+        evenNumbers.push(num);
+    } else {
+        oddNumbers.push(num);
+    }
+}
+
+console.log(numArray);
+console.log(`Odd ${oddNumbers}`);
+console.log(`Even ${evenNumbers}`);
 
 /**
  * #4 Flipping Switches
@@ -61,6 +94,18 @@
 // Example output
 // true, false, true, true
 // Toggled false, true, false, false
+
+let bool = [true, true, false, false];
+let toggled = []
+for (i of bool) {
+    if (i) {
+        toggled.push(false);
+    } else {
+        toggled.push(true);
+    }
+}
+
+console.log(`bool: ${bool}\ntoggled: ${toggled}`);
 
 
 /**
@@ -77,3 +122,55 @@
 // Example output
 // Before loop 3, 0, 2, 8, 0, 0, 0
 // After loop 3, 0, 2, 8
+
+let nonZeroFlag = false;
+let nums = [1,6,0,7,5,3,0,0,0,0,6,0];
+
+for (let j = nums.length - 1; j >= 0; j-- ) {
+    if (nums[j] === 0) {
+        nums.pop();
+    } else {
+        break;
+    }
+}
+console.log(nums);
+
+/*
+ * 1. Create a largish array full of numbers, including at least two different numbers 
+ * that repeat (Example: [0, 2, 1, 2, 4, 1])
+ * 2. Find the "greatest position distance" between repeating numbers in your array.
+ * Example: In an array with the values [0, 2, 1, 2, 4, 1] the greatest position distance is 
+ * between the matching '1' values at index 2 and 5. 
+ * 
+ * Executing greatestDistance against this array would return 3. (i.e. 5 - 2)
+ */
+
+let newNums = [0, 2, 1, 2, 4, 7, 6, 0];
+
+let maxDist = 0; // want to set this equal to the largest distance
+let currDist = 0; // this will be the current distance between the compared indices
+let posCounter = 0; // want this to be every index but the current index
+
+// create a loop to iterate over every index in the array
+for (x in newNums) {
+
+    //create a loop to iterate over every checking index (not including the current index)
+    for (posCounter = 0; posCounter < newNums.length; posCounter++) {
+
+        // ensure we aren't comparing the same index
+        if(x == posCounter) {
+            continue;
+        // if there is a match between the starting index and the checking index, set currDist to the absolute value
+        // of the difference between the two indeces
+        } else {
+            if (newNums[x] === newNums[posCounter]) {
+                currDist = Math.abs(x - posCounter);
+                // if the currDist is greater than maxDist, set maxDist = currDist
+                if (currDist > maxDist) {
+                    maxDist = currDist;
+                }
+            }
+        }
+    }
+}
+console.log(`The max distance is: ${maxDist}`);
